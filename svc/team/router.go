@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/xzor-dev/xzor-server/app/api"
+	"github.com/xzor-dev/xzor-server/lib/api"
 )
 
 type router struct {

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/xzor-dev/xzor-server/app/team"
+	"github.com/xzor-dev/xzor-server/svc/team"
 )
 
 func main() {
