@@ -5,12 +5,12 @@ import (
 
 	"github.com/xzor-dev/xzor-server/svc/action"
 	"github.com/xzor-dev/xzor-server/svc/chain"
-	"github.com/xzor-dev/xzor-server/svc/client"
+	"github.com/xzor-dev/xzor-server/svc/user"
 )
 
 func TestChainService(t *testing.T) {
 	c := chain.New()
-	cli, err := client.New()
+	u, err := user.New()
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -19,7 +19,7 @@ func TestChainService(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected an error when creating a new block")
 	}
-	act, err := action.New(cli, "test-source", "test-action", []byte("test-data"))
+	act, err := action.New(u, "test-source", "test-action", []byte("test-data"))
 	if err != nil {
 		t.Fatalf("%v", err)
 	}

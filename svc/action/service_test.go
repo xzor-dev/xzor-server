@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/xzor-dev/xzor-server/svc/action"
-	"github.com/xzor-dev/xzor-server/svc/client"
+	"github.com/xzor-dev/xzor-server/svc/user"
 )
 
 func TestActionService(t *testing.T) {
@@ -13,11 +13,11 @@ func TestActionService(t *testing.T) {
 	service := action.NewService()
 	service.SetSource(sourceName, sourceInstance)
 
-	cli, err := client.New()
+	u, err := user.New()
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
-	act, err := action.New(cli, sourceName, "test-func", []byte("hello"))
+	act, err := action.New(u, sourceName, "test-func", []byte("hello"))
 	if err != nil {
 		t.Fatalf("%v", err)
 	}

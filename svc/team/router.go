@@ -28,6 +28,7 @@ func (r *router) createTeam(res http.ResponseWriter, req *http.Request) *api.JSO
 	if err != nil {
 		return api.NewJSONErrorResponse(err)
 	}
+
 	if data := params.Validate(); data != nil {
 		return api.NewJSONFailResponse(nil, data)
 	}
