@@ -1,8 +1,6 @@
 package api_test
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -89,19 +87,5 @@ func newAPI() (*api.API, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	data, err := ioutil.ReadFile(dir + "/testdata/api_config.json")
-	if err != nil {
-		return nil, err
-	}
-
-	conf := &api.Config{}
-	err = json.Unmarshal(data, conf)
-	if err != nil {
-		return nil, err
-	}
-
-	return &api.API{
-		ClientID: conf.ClientID,
-	}, nil
+	return api.FromConfigFile(dir + "/testdata/api_config.json")
 }

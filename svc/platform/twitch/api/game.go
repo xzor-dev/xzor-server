@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"errors"
+	"github.com/xzor-dev/xzor-server/svc/platform"
 )
 
 // ErrEmptyGamesResponse indicates that a request for a game returned zero results.
@@ -13,6 +14,14 @@ type Game struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
 	BoxArtURL string `json:"box_art_url"`
+}
+
+// Params returns the platform.GameParams for the game.
+func (g *Game) Params() platform.GameParams {
+	return platform.GameParams{
+		"id":   g.ID,
+		"name": g.Name,
+	}
 }
 
 // GamesParams are parameters used when requesting games.

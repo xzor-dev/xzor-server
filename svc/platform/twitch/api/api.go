@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -20,6 +21,24 @@ type Config struct {
 // API provides methods used to interact with the twitch API.
 type API struct {
 	ClientID string
+}
+
+// FromConfigFile creates a new API instance using a configuration file location at path.
+func FromConfigFile(path string) (*API, error) {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	conf := &Config{}
+	err = json.Unmarshal(data, conf)
+	if err != nil {
+		return nil, err
+	}
+
+	return &API{
+		ClientID: conf.ClientID,
+	}, nil
 }
 
 // Get executes a GET request on the supplied path and adds the supplied params as query parameters.
