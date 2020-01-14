@@ -11,6 +11,11 @@ type GameCollector interface {
 	Next() (Game, error)
 }
 
+// GameFinder allows for finding games on a platform.
+type GameFinder interface {
+	FindGames(string) ([]Game, error)
+}
+
 // GameParams are platform-specific parameters for games.
 type GameParams map[string]string
 

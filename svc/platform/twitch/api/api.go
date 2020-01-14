@@ -54,7 +54,7 @@ func (a *API) Get(path string, params map[string]string) ([]byte, error) {
 		return nil, err
 	}
 	req.Header.Set("Client-ID", a.ClientID)
-	//log.Printf("getting url: %s with client ID: %s", url, a.ClientID)
+
 	client := http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
@@ -65,6 +65,6 @@ func (a *API) Get(path string, params map[string]string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	//log.Printf("got response data: %s", data)
+
 	return data, nil
 }

@@ -1,9 +1,7 @@
 package twitch
 
 import (
-	"errors"
 	"io"
-	"log"
 
 	"github.com/xzor-dev/xzor-server/svc/platform"
 	"github.com/xzor-dev/xzor-server/svc/platform/twitch/api"
@@ -50,7 +48,7 @@ func NewGameCollector(a *api.API, maxResults int) *GameCollector {
 // or no more games can be found.
 func (c *GameCollector) Next() (platform.Game, error) {
 	if !c.started {
-		return nil, errors.New("collector hasn't been started")
+		c.start()
 	}
 	for {
 		select {
@@ -60,16 +58,16 @@ func (c *GameCollector) Next() (platform.Game, error) {
 				params: g.Params(),
 			}, nil
 		case err := <-c.err:
+			c.started = false
 			return nil, err
 		case <-c.done:
+			c.started = false
 			return nil, io.EOF
 		}
 	}
 }
 
-// Start initialized all required variables and begins collecting games.
-func (c *GameCollector) Start() {
-	log.Printf("starting collector")
+func (c *GameCollector) start() {
 	c.started = true
 	c.index = 0
 	c.maxIndex = c.MaxResults - 1

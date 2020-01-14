@@ -23,7 +23,6 @@ func TestGameCollector(t *testing.T) {
 
 	max := 25
 	collector := twitch.NewGameCollector(a, max)
-	collector.Start()
 	games := make([]platform.Game, max)
 	i := 0
 	for {

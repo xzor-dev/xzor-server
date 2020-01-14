@@ -5,6 +5,11 @@ import (
 	"github.com/xzor-dev/xzor-server/svc/platform/twitch/api"
 )
 
+const (
+	// ID is the ID of the twitch platform.
+	ID = "twitch"
+)
+
 // Service implements platform.Service for twitch.tv
 type Service struct {
 	api api.API
